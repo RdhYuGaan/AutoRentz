@@ -33,7 +33,8 @@
 }
 
 .custom-btn {
-  @apply flex flex-row relative justify-center items-center py-3 px-6 outline-none;
+  @apply flex flex-row relative justify-center items-center py-3 px-6 outline-none ;
+  background-color: rgb(27, 14, 214);
 }
 /* END: General styles */
 
