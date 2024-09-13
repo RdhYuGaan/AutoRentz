@@ -10,11 +10,18 @@ const SearchManufacturer = ({
     manufacturer, setManufacturer}
 :SearchManufacturerProps) => {
   const [query,setquery]=useState('');
-  
-  const filteredManufacturers= query === ""?
-  manufacturers : manufacturers.filter((item)=>(
 
-  ))
+  
+  const filteredManufacturers =
+   query === ""
+     ?manufacturers 
+     : manufacturers.filter((item)=>(
+      item.toLowerCase()
+      .replace(/\s+g, "")
+      .includes(query.toLowerCase().replace(/\s+g,"")
+
+      )))
+
   return (
    <div className='search-manufacturer'>
     <Combobox>
