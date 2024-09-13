@@ -16,8 +16,9 @@ export default function Home() {
           <SearchBar />
 
           <div className="home__filter-container">
-            <CustomFilter title="fuel" />
-            <CustomFilter title="year" />
+             {/* <CustomFilter title="fuel" />
+             <CustomFilter title="year" /> */}
+           
           </div> {/* This div was not properly closed */}
         </div>
       </div>
