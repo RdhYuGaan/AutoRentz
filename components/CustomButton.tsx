@@ -4,7 +4,7 @@ import "../app/globals.css"
 import Image from 'next/image';
 import { CustomButtonProps } from './types'; 
  
- CustomButton = ({
+ const CustomButton = ({
   title, containerStyle,handleClick, btnType,textStyles,rightIcon
 }: CustomButtonProps) => {
   return (
