@@ -3,7 +3,14 @@ import Image from "next/image";
 import { fetchCars } from "@/utils";
 
 export default async function Home() {
-  const allCars= await fetchCars();
+  // const allCars= await fetchCars();
+  const allCars = await fetchCars({
+    manufacturer: "",
+    year:  2020,
+    fuel:  "",
+    limit:  10,
+    model:  "",
+  });
 
   const isDataEmpty= !Array.isArray(allCars) || allCars.length<1 || !allCars;
 
