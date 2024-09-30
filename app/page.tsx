@@ -1,20 +1,19 @@
 import { CustomFilter, Hero, SearchBar, CarCard } from "@/components";
-import Image from "next/image";
 import { fetchCars } from "@/utils";
 
 export default async function Home() {
-  // const allCars= await fetchCars();
   const allCars = await fetchCars({
     manufacturer: "",
-    year:  2020,
-    fuel:  "",
-    limit:  10,
-    model:  "",
+    year: 2020,
+    fuel: "",
+    limit: 2,
+    model: "",
   });
 
-  const isDataEmpty= !Array.isArray(allCars) || allCars.length<1 || !allCars;
+  // Log the response to check the data
+  console.log("All cars data:", allCars);
 
-
+  const isDataEmpty = !allCars || !Array.isArray(allCars) || allCars.length < 1;
 
   return (
     <main className="overflow-hidden">
@@ -28,29 +27,26 @@ export default async function Home() {
 
         <div className="home__filters">
           <SearchBar />
-
           <div className="home__filter-container">
-             <CustomFilter title="fuel" />
-             <CustomFilter title="year" /> 
-           
-          </div> 
+            <CustomFilter title="fuel" />
+            <CustomFilter title="year" />
+          </div>
         </div>
-          
-          {isDataEmpty ? (
-            <section>
-              <div className="home__class-wrapper">
-                {allCars?.map((car)=> (<CarCard car={car} />
-                ))}
-              </div>
-            </section>
-          ):(
-            <div className="home__error-container">
-              <h2 className="text-black text-xl font-bold">
-              oops, no results  
-              </h2> 
-              <p>{allCars?.message}</p>
+
+        {!isDataEmpty ? (
+          <section>
+            <div className="home__car-wrapper">
+              {allCars?.map((car, index) => (
+                <CarCard key={index} car={car} />
+              ))}
             </div>
-          )}
+          </section>
+        ) : (
+          <div className="home__error-container">
+            <h2 className="text-black text-xl font-bold">Oops, no results</h2>
+            <p>Try adjusting your filters or try again later.</p>
+          </div>
+        )}
       </div>
     </main>
   );

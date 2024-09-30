@@ -41,29 +41,38 @@ export const deleteSearchParams = (type: string) => {
   return newPathname;
 };
 
-export async function fetchCars(filters: FilterProps ) {
+export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, model, limit, fuel } = filters;
 
-  // Set the required headers for the API request
   const headers: HeadersInit = {
     "X-RapidAPI-Key": process.env.NEXT_PUBLIC_RAPID_API_KEY || "",
     "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
   };
-  // console.log('Using RapidAPI Key:', process.env.NEXT_PUBLIC_RAPID_API_KEY);
 
-  // Set the required headers for the API request
-  const response = await fetch(
-    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
-    {
-      headers: headers,
+  try {
+    const response = await fetch(
+      `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
+      {
+        headers,
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch cars: ${response.statusText}`);
     }
-  );
 
-  // Parse the response as JSON
-  const result = await response.json();
+    const result = await response.json();
 
-  return result;
+    
+    // console.log("API response:", result);
+
+    return result; // Return the result as expected data
+  } catch (error) {
+    console.error("Error fetching cars:", error);
+    return null;
+  }
 }
+
 
 export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   const url = new URL("https://cdn.imagin.studio/getimage");
