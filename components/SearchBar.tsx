@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { SearchManufacturer } from "./";
 import Image from "next/image";
+import { useRouter } from "next/navigation"; // Correct import
 
-// Changed to uppercase to adhere to React component naming conventions
 const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
   <button type="submit" className={`-ml-3 z-10 ${otherClasses}`}>
     <Image
@@ -20,14 +20,38 @@ const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
 const SearchBar = () => {
   const [manufacturer, setManufacturer] = useState("");
   const [model, setModel] = useState("");
+  const router = useRouter(); // Correct hook usage
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!manufacturer && !model) {
-      return alert("Please fill in the search fields.");
+
+    if (manufacturer === "" && model === "") {
+      return alert("Please fill in the search bar");
     }
-    // Add your search logic here
-    console.log("Searching for", manufacturer, model);
+
+    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+  };
+
+  const updateSearchParams = (model: string, manufacturer: string) => {
+    const searchParams = new URLSearchParams(window.location.search);
+
+    // Update or delete the model search param
+    if (model) {
+      searchParams.set("model", model);
+    } else {
+      searchParams.delete("model");
+    }
+
+    // Update or delete the manufacturer search param
+    if (manufacturer) {
+      searchParams.set("manufacturer", manufacturer);
+    } else {
+      searchParams.delete("manufacturer");
+    }
+
+    const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+
+    router.push(newPathname); // Navigate to the updated URL
   };
 
   return (
@@ -37,9 +61,9 @@ const SearchBar = () => {
           manufacturer={manufacturer}
           setManuFacturer={setManufacturer}
         />
-        
         <SearchButton otherClasses="sm:hidden" />
       </div>
+
       <div className="searchbar__item">
         <Image
           src="/model-icon.png"
@@ -56,7 +80,10 @@ const SearchBar = () => {
           placeholder="Tiguan"
           className="searchbar__input"
         />
+        <SearchButton otherClasses="sm:hidden" />
       </div>
+
+      <SearchButton otherClasses="max-sm:hidden" />
     </form>
   );
 };
