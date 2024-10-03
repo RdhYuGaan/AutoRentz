@@ -1,8 +1,6 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+export default {
+    reactStrictMode: true,
     images: {
-        domains:['cdn.imagin.studio']
-    }
-}
-
-export default nextConfig;
+      domains: ['cdn.imagin.studio'], // Allow images from cdn.imagin.studio
+    },
+  };
