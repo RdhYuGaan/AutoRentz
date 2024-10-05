@@ -9,7 +9,7 @@ const Footer = () => (
       <div className='flex flex-col justify-start items-start gap-6'>
         <Image src='/logo.svg' alt='logo' width={118} height={18} className='object-contain' />
         <p className='text-base text-gray-700'>
-          Carhub 2024 <br />
+          CarHub 2024 <br />
           All Rights Reserved &copy;
         </p>
       </div>
@@ -38,10 +38,10 @@ const Footer = () => (
       <p>@2024 CarHub. All rights reserved</p>
 
       <div className="footer__copyrights-link">
-        <Link href="/" className="text-gray-500">
+        <Link href="/" className="text-gray-600">
           Privacy & Policy
         </Link>
-        <Link href="/" className="text-gray-500">
+        <Link href="/" className="text-gray-600">
           Terms & Condition
         </Link>
       </div>
