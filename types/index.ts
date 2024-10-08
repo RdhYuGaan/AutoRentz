@@ -23,6 +23,11 @@ export interface FilterProps {
   fuel: string;
 }
 
+export interface OptionProps {
+  title: string;
+  value: string;
+}
+
 export interface HomeProps {
   searchParams: FilterProps;
 }
@@ -47,10 +52,7 @@ export interface CustomButtonProps {
   handleClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export interface OptionProps {
-  title: string;
-  value: string;
-}
+
 
 export interface CustomFilterProps {
   title: string;
