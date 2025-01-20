@@ -1,15 +1,14 @@
-import { CustomFilter, Hero, SearchBar, CarCard } from "@/components";
+import { CustomFilter, Hero, SearchBar } from "@/components";
 import FiltersAndCars from "@/components/FiltersAndCars";
-import { fuels, yearsOfProduction } from "@/constants";
 import { fetchCars } from "@/utils";
 
 export default async function Home() {
   const allCars = await fetchCars({
-    manufacturer: '',
+    manufacturer: "",
     year: 2022,
-    fuel: '',
+    fuel: "",
     limit: 10,
-    model: '',
+    model: "",
   });
 
   return (
@@ -27,5 +26,3 @@ export default async function Home() {
     </main>
   );
 }
-
-
